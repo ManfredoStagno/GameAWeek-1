@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     public float speed = 50;
     public float deadTime = 5f;
+    public bool isHealing = false;
 
     private IEnumerator dieTimer;
 
@@ -28,7 +29,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        lc.Fade(false);
+        lc.Fade(isHealing);
 
         //if life regained stopcoroutine
         if (lc.lifeBar < 1 && dieTimer != null)
@@ -80,7 +81,7 @@ public class PlayerController : MonoBehaviour
         {
             if (other.GetComponent<PickUp>().pickedUp != true)
             {
-                lc.life -= 5;
+                lc.life -= other.GetComponent<PickUp>().heal;
                 other.GetComponent<PickUp>().pickedUp = true;
             }
         }

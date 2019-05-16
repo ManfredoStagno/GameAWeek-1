@@ -45,7 +45,10 @@ public class LightController : MonoBehaviour
 
     public void Fade(bool healing)
     {
-        life += Time.deltaTime;
+        if(!healing)
+            life += Time.deltaTime;
+        if(healing)
+            life -= Time.deltaTime;
 
         if (life > decayTime)
             life = decayTime;
@@ -54,10 +57,7 @@ public class LightController : MonoBehaviour
 
         lifeBar = life / decayTime;
 
-        if(!healing)
-            lightMultiplier = 1f - lifeBar;
-        if (healing)
-            lightMultiplier = lifeBar;
+        lightMultiplier = 1f - lifeBar;        
 
         light.intensity = fullLight * lightMultiplier;
     }

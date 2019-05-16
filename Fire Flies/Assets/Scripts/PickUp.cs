@@ -8,6 +8,8 @@ public class PickUp : MonoBehaviour
     public LightController lc;
     [HideInInspector]
     public bool pickedUp = false;
+
+    public float heal = 5;
     
     void Start()
     {

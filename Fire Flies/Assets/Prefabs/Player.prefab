@@ -146,8 +146,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f733297b45be2214281d05e7b31fc2b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 10
   deadTime: 5
+  isHealing: 0
 --- !u!114 &1212033055090889802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,7 +164,7 @@ MonoBehaviour:
   lightObject: {fileID: 1212033054889913869}
   light: {fileID: 0}
   lightTransform: {fileID: 0}
-  decayTime: 25
+  decayTime: 60
   frequency: 1
   magnitude: 0.5
   fullLight: 0
