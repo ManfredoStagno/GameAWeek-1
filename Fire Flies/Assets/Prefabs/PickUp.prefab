@@ -4777,8 +4777,8 @@ GameObject:
   m_Component:
   - component: {fileID: 222738037564278790}
   - component: {fileID: 7641064415922784869}
-  - component: {fileID: 8774518714020875625}
   - component: {fileID: 8015312422111597870}
+  - component: {fileID: 8774518714020875625}
   m_Layer: 0
   m_Name: PickUp
   m_TagString: PickUp
@@ -4816,21 +4816,6 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8774518714020875625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9099234967954427919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18882aabbad76e6498732966faf799f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lc: {fileID: 0}
-  pickedUp: 0
-  heal: 5
 --- !u!114 &8015312422111597870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4846,10 +4831,26 @@ MonoBehaviour:
   lightObject: {fileID: 6151007058105585449}
   light: {fileID: 0}
   lightTransform: {fileID: 0}
-  decayTime: 2
+  decayTime: 1
   frequency: 1
   magnitude: 0.5
+  hoverMultiplier: 1
   fullLight: 0
   lightMultiplier: 0
   life: 0
   lifeBar: 0
+--- !u!114 &8774518714020875625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9099234967954427919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18882aabbad76e6498732966faf799f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lc: {fileID: 0}
+  pickedUp: 0
+  heal: 15

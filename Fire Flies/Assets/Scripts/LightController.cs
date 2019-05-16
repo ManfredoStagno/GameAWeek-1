@@ -17,6 +17,9 @@ public class LightController : MonoBehaviour
     public float magnitude = 0.5f;
 
     [HideInInspector]
+    public float hoverMultiplier = 1;
+
+    [HideInInspector]
     public float fullLight;
     [HideInInspector]
     public float lightMultiplier;
@@ -46,7 +49,7 @@ public class LightController : MonoBehaviour
     public void Fade(bool healing)
     {
         if(!healing)
-            life += Time.deltaTime;
+            life += Time.deltaTime * hoverMultiplier;
         if(healing)
             life -= Time.deltaTime;
 
