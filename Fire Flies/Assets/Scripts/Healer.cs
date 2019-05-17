@@ -7,6 +7,8 @@ public class Healer : MonoBehaviour
     public float timer = 2;
     public float puff = 10;
 
+    public PickUp[] pickUps;
+
     void Start()
     {
         
@@ -21,8 +23,12 @@ public class Healer : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<PlayerController>().isHealing = true;
             StartCoroutine(HealPlus(other.GetComponent<LightController>()));
+
+            foreach (PickUp pickUp in pickUps)
+            {
+                pickUp.ResetValues();
+            }
         }
     }
 
@@ -35,7 +41,7 @@ public class Healer : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<PlayerController>().isHealing = false;
+            
             StopAllCoroutines();
         }
     }

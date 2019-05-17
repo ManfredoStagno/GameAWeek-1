@@ -25,4 +25,10 @@ public class PickUp : MonoBehaviour
         if (pickedUp)
             lc.Fade(false);
     }
+
+    public void ResetValues()
+    {
+        pickedUp = false;
+        lc.light.intensity = lc.fullLight;
+    }
 }

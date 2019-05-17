@@ -147,9 +147,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCamera: {fileID: 0}
+  startCheckPoint: {fileID: 0}
   speed: 7
   deadTime: 3
-  myHoverMultiplier: 3
+  myHoverMultiplier: 2.5
   isHealing: 0
 --- !u!114 &1212033055090889802
 MonoBehaviour:

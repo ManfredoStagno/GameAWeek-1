@@ -17,7 +17,7 @@ public class LightController : MonoBehaviour
     public float magnitude = 0.5f;
 
     [HideInInspector]
-    public float hoverMultiplier = 1;
+    public float lifeMultiplier = 1;
 
     [HideInInspector]
     public float fullLight;
@@ -27,12 +27,16 @@ public class LightController : MonoBehaviour
     public float life;
     [HideInInspector]
     public float lifeBar;
+    [HideInInspector]
+    public bool isChomped;
 
 
     void OnEnable()
     {
         light = lightObject.GetComponent<Light>();
         lightTransform = lightObject.GetComponent<Transform>();
+
+        
     }
 
     private void FixedUpdate()
@@ -49,9 +53,10 @@ public class LightController : MonoBehaviour
     public void Fade(bool healing)
     {
         if(!healing)
-            life += Time.deltaTime * hoverMultiplier;
+            life += Time.deltaTime * lifeMultiplier;
         if(healing)
             life -= Time.deltaTime;
+        
 
         if (life > decayTime)
             life = decayTime;

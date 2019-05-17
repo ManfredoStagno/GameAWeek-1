@@ -6,19 +6,26 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody rb;
     LightController lc;
-    public Transform myCamera;
-    
     private IEnumerator dieTimer;
+
+    public Transform myCamera;
+    public Transform startCheckPoint;
+    
 
     public float speed = 50;
     public float deadTime = 5f;
     public float myHoverMultiplier;
+    public float myChompMultiplier;
+    
+
     [HideInInspector]
     public bool isHealing = false;
+    [HideInInspector]
+    public bool isChomped;
 
+    private Vector3 lastCheckpoint;
+    private bool canMove = true;
 
-    //public float hoveringOffset = 2;
-    //private Vector3 hoveringPosition;
 
     void Start()
     {
@@ -28,13 +35,16 @@ public class PlayerController : MonoBehaviour
         lc.fullLight = lc.light.intensity;
         lc.life = 0;
 
-        //hoveringPosition = new Vector3(0, hoveringOffset, 0);
+        lastCheckpoint = startCheckPoint.position;
     }
 
     private void FixedUpdate()
     {
-        Move();
-        Hover();
+        if (canMove)
+        {
+            Move();
+            Multipliers(); 
+        }
     }
 
     private void Update()
@@ -72,33 +82,22 @@ public class PlayerController : MonoBehaviour
 
         MoveRelativeToCamera(movementDirection);
     }
-
     
-    bool isHovering = false;
-    void Hover()
+    void Multipliers()
     {
-        
-        if (Input.GetKey(KeyCode.Space))
+        if (isChomped)
+        {
+            lc.lifeMultiplier = myChompMultiplier;
+        }
+        else if (Input.GetKey(KeyCode.Space))
         {
             rb.useGravity = false;
-            lc.hoverMultiplier = myHoverMultiplier;
-
-            //if (!isHovering)
-            //{
-            //    transform.position = transform.position + hoveringPosition;
-            //    isHovering = true;
-            //}
+            lc.lifeMultiplier = myHoverMultiplier;
         }
         else
         {
-        //    if (isHovering)
-        //    {
-        //        transform.position = transform.position - hoveringPosition;
-        //        isHovering = false;
-        //    }
-
             rb.useGravity = true;
-            lc.hoverMultiplier = 1;
+            lc.lifeMultiplier = 1;
         }
     }
 
@@ -131,18 +130,35 @@ public class PlayerController : MonoBehaviour
                 other.GetComponent<PickUp>().pickedUp = true;
             }
         }
+
+        if (other.CompareTag("Healer"))
+        {
+            isHealing = true;
+
+            lastCheckpoint = other.transform.position;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Healer"))
+        {
+            isHealing = false;
+        }
     }
 
     void Die()
     {
-        //TODO: die method
+        transform.position = lastCheckpoint;
         Debug.Log("You Dead");
     }
 
     IEnumerator DieCoroutine()
     {
+        canMove = false;
         yield return new WaitForSeconds(deadTime);
         Die();
+        canMove = true;
     }
     
 }
