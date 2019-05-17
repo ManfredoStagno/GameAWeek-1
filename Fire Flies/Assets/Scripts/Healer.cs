@@ -64,6 +64,21 @@ public class Healer : MonoBehaviour
         yield return new WaitForSeconds(timer);
         lc.life -= puff;
         Debug.Log("Puff");
+        yield return new WaitForSeconds(timer);
+        lc.life -= puff;
+        Debug.Log("Puff");
+        yield return new WaitForSeconds(timer);
+        lc.life -= puff;
+        Debug.Log("Puff");
+        yield return new WaitForSeconds(timer);
+        lc.life -= puff;
+        Debug.Log("Puff");
+        yield return new WaitForSeconds(timer);
+        lc.life -= puff;
+        Debug.Log("Puff");
+        yield return new WaitForSeconds(timer);
+        lc.life -= puff;
+        Debug.Log("Puff");
 
     }
 }

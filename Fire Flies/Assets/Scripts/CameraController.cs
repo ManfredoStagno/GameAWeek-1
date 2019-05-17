@@ -11,6 +11,7 @@ public class CameraController : MonoBehaviour
     private float currentY = 0.0f;
 
     public float distance = 10.0f;
+    public Vector3 offset;
     
     public float sensitivityX = 1.0f;
     public float sensitivityY = 1.0f;
@@ -35,6 +36,6 @@ public class CameraController : MonoBehaviour
         Vector3 dir = new Vector3(0, 0, -distance);
         Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
         transform.position = target.position + rotation * dir;
-        transform.LookAt(target.position);
+        transform.LookAt(target.position + offset);
     }
 }

@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public bool isHealing = false;
 
+
     //public float hoveringOffset = 2;
     //private Vector3 hoveringPosition;
 
@@ -58,7 +59,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Die if falling off
-        if (transform.position.y < -5)
+        if (transform.position.y < -42)
             Die();
     }
 
