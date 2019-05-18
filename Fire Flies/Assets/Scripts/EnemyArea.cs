@@ -6,7 +6,7 @@ public class EnemyArea : MonoBehaviour
 {
     [HideInInspector]
     public bool playerDetected = false;
-    [HideInInspector]
+    
     public Transform player;
 
     void Start()
@@ -35,7 +35,7 @@ public class EnemyArea : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerDetected = false;
-            player = null;
+            //player = null;
             Debug.Log("NOT Chasing");
         }
     }

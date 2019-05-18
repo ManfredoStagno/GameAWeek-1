@@ -9637,11 +9637,9 @@ MonoBehaviour:
   target:
   - {fileID: 4748252668063803087}
   - {fileID: 8600039749913010860}
-  - {fileID: 5896578329582541483}
-  - {fileID: 5703309504409120587}
   speed: 6
   chompCeiling: 20
-  chompSpeed: 0.25
+  chompSpeed: 0.7
 --- !u!1 &6364135627782181525
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody rb;
     LightController lc;
-    private IEnumerator dieTimer;
+    //private IEnumerator dieTimer;
 
     public Transform myCamera;
     public Transform startCheckPoint;
@@ -51,26 +51,41 @@ public class PlayerController : MonoBehaviour
     {
         lc.Fade(isHealing);
 
-        //if life regained stopcoroutine
-        if (lc.lifeBar < 1 && dieTimer != null)
+        if (transform.position.y < -42 || lc.lifeBar >= 1)
         {
-            StopCoroutine(dieTimer);
-        }
-        //Run coroutine
-        if (lc.lifeBar >= 1)
-        {
-            //return if coroutine active
-            if (dieTimer != null)
-                return;
-            //StartCoroutine
-            else
-                dieTimer = DieCoroutine();
-                StartCoroutine(dieTimer);
+            StartCoroutine(DieCoroutine());
         }
 
-        //Die if falling off
-        if (transform.position.y < -42)
-            Die();
+        #region
+        ////Die if falling off
+        //if (transform.position.y < -42)
+        //{
+        //    Die();
+        //    canMove = true;
+        //}
+
+        ////if life regained stopcoroutine
+        //if (lc.lifeBar < 1 && dieTimer != null)
+        //{
+        //    StopCoroutine(dieTimer);
+        //    canMove = true;
+        //}
+        ////Run coroutine
+        //if (lc.lifeBar >= 1)
+        //{
+        //    //return if coroutine active
+        //    if (dieTimer != null)
+        //    {
+        //        canMove = true;
+        //        return;
+        //    }
+        //    //StartCoroutine
+        //    else
+        //        dieTimer = DieCoroutine();
+        //        StartCoroutine(dieTimer);
+        //}
+        #endregion //old death handling
+
     }
 
     void Move()
@@ -136,6 +151,8 @@ public class PlayerController : MonoBehaviour
             isHealing = true;
 
             lastCheckpoint = other.transform.position;
+
+            StopAllCoroutines();
         }
     }
 
@@ -149,6 +166,7 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
+        canMove = true;
         transform.position = lastCheckpoint;
         Debug.Log("You Dead");
     }
@@ -158,7 +176,7 @@ public class PlayerController : MonoBehaviour
         canMove = false;
         yield return new WaitForSeconds(deadTime);
         Die();
-        canMove = true;
+        
     }
     
 }
