@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
 
-    public Transform target;
+    public GameObject target;
 
     private float currentX = 0.0f;
     private float currentY = 0.0f;
@@ -33,9 +33,12 @@ public class CameraController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 dir = new Vector3(0, 0, -distance);
-        Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
-        transform.position = target.position + rotation * dir;
-        transform.LookAt(target.position + offset);
+        if (!target.GetComponent<PlayerController>().finale)
+        {
+            Vector3 dir = new Vector3(0, 0, -distance);
+            Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
+            transform.position = target.transform.position + rotation * dir;
+        }
+        transform.LookAt(target.transform.position + offset);
     }
 }

@@ -28,7 +28,8 @@ public class PlayerController : MonoBehaviour
     private bool canMove = true;
 
     private bool isEnding = false;
-    private bool finale = false;
+    [HideInInspector]
+    public bool finale = false;
 
     ParticleSystem particle;
     //Color startColor;
@@ -191,6 +192,7 @@ public class PlayerController : MonoBehaviour
 
         if (other.CompareTag("Finale"))
         {
+            Debug.Log("finale");
             finale = true;
         }
     }
