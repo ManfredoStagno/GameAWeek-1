@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody rb;
     LightController lc;
+    AudioSource audioSource;
     //private IEnumerator dieTimer;
 
     public Transform myCamera;
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         lc = GetComponent<LightController>();
+        audioSource = GetComponent<AudioSource>();
 
         lc.fullLight = lc.light.intensity;
         lc.life = 0;
@@ -153,6 +155,13 @@ public class PlayerController : MonoBehaviour
             lastCheckpoint = other.transform.position;
 
             StopAllCoroutines();
+
+            if (other.GetComponent<Healer>().healerAudioClip != null && other.GetComponent<Healer>().healerAudioClip != audioSource.clip)
+            {
+                audioSource.Stop();
+                audioSource.clip = other.GetComponent<Healer>().healerAudioClip;
+                audioSource.Play();
+            }
         }
     }
 

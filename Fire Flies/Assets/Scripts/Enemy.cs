@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     Rigidbody rb;
     EnemyArea enemyArea;
     LightController lc;
+    
 
     public Transform[] target;
     public float speed;

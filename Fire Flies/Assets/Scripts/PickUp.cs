@@ -10,9 +10,13 @@ public class PickUp : MonoBehaviour
     public bool pickedUp = false;
 
     public float heal = 5;
+
+    private AudioSource audioSource;
     
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+
         lc = GetComponent<LightController>();
 
         lc.fullLight = lc.light.intensity;
@@ -30,5 +34,16 @@ public class PickUp : MonoBehaviour
     {
         pickedUp = false;
         lc.light.intensity = lc.fullLight;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!pickedUp)
+        {
+            if (other.CompareTag("Player"))
+            {
+                audioSource.Play();
+            }
+        }
     }
 }

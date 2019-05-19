@@ -9,9 +9,12 @@ public class EnemyArea : MonoBehaviour
     
     public Transform player;
 
+    private AudioSource audioSource;
+
     void Start()
     {
         playerDetected = false;
+        audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -27,6 +30,7 @@ public class EnemyArea : MonoBehaviour
             playerDetected = true;
             player = other.GetComponent<Transform>();
             Debug.Log("Chasing");
+            audioSource.Play();
         }
     }
 
@@ -37,6 +41,7 @@ public class EnemyArea : MonoBehaviour
             playerDetected = false;
             //player = null;
             Debug.Log("NOT Chasing");
+            audioSource.Stop();
         }
     }
 }

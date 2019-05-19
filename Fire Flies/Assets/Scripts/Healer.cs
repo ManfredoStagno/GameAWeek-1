@@ -9,9 +9,13 @@ public class Healer : MonoBehaviour
 
     public PickUp[] pickUps;
 
+    private AudioSource audioSource;
+
+    public AudioClip healerAudioClip;
+
     void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -23,12 +27,15 @@ public class Healer : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+
             StartCoroutine(HealPlus(other.GetComponent<LightController>()));
 
             foreach (PickUp pickUp in pickUps)
             {
                 pickUp.ResetValues();
             }
+
+            audioSource.Play();
         }
     }
 
@@ -43,6 +50,8 @@ public class Healer : MonoBehaviour
         {
             
             StopAllCoroutines();
+
+            audioSource.Stop();
         }
     }
 
