@@ -27,12 +27,21 @@ public class PlayerController : MonoBehaviour
     private Vector3 lastCheckpoint;
     private bool canMove = true;
 
+    private bool isEnding = false;
+    private bool finale = false;
+
+    ParticleSystem particle;
+    //Color startColor;
+
+    public float smoothColorSpeed = 0.01f;
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         lc = GetComponent<LightController>();
         audioSource = GetComponent<AudioSource>();
+        
 
         lc.fullLight = lc.light.intensity;
         lc.life = 0;
@@ -45,7 +54,8 @@ public class PlayerController : MonoBehaviour
         if (canMove)
         {
             Move();
-            Multipliers(); 
+            if(!finale)
+                Multipliers(); 
         }
     }
 
@@ -88,6 +98,15 @@ public class PlayerController : MonoBehaviour
         //}
         #endregion //old death handling
 
+        if (isEnding)
+        {
+            
+            Color smoothedColor = Color.Lerp(lc.light.color, Color.white, smoothColorSpeed);
+            lc.light.color = smoothedColor;
+        }
+
+        if (finale)
+            rb.useGravity = false;
     }
 
     void Move()
@@ -163,6 +182,17 @@ public class PlayerController : MonoBehaviour
                 audioSource.Play();
             }
         }
+
+        if (other.CompareTag("EndTrigger"))
+        {
+            isHealing = true;
+            isEnding = true;
+        }
+
+        if (other.CompareTag("Finale"))
+        {
+            finale = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -184,6 +214,7 @@ public class PlayerController : MonoBehaviour
     {
         canMove = false;
         yield return new WaitForSeconds(deadTime);
+        Instantiate(Resources.Load("PickUp") as GameObject, transform.position, Quaternion.LookRotation(Vector3.up,Vector3.forward));
         Die();
         
     }

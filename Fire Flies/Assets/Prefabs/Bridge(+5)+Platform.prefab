@@ -521,11 +521,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5688000002119726027}
   m_Layer: 0
-  m_Name: Bridge(+10) 3x3
+  m_Name: Bridge(+5)+Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5688000002119726027
 Transform:
@@ -566,7 +566,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5067139092085823361
 Transform:
