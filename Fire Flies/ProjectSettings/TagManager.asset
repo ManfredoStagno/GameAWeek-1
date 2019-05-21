@@ -8,6 +8,7 @@ TagManager:
   - Healer
   - EndTrigger
   - Finale
+  - FakeSetpiece
   layers:
   - Default
   - TransparentFX
